@@ -6,6 +6,7 @@ resource "vsphere_virtual_machine" "sap_hana_database" {
   num_cpus                   = each.value.model == "" ? each.value.cpus : lookup(local.sap_hana_database_model_cpus, each.value.model)
   num_cores_per_socket       = each.value.cpus_per_socket
   memory                     = each.value.model == "" ? each.value.memory : lookup(local.sap_hana_database_model_memory, each.value.model)
+  memory_reservation         = each.value.model == "" ? each.value.memory : lookup(local.sap_hana_database_model_memory, each.value.model)
   folder                     = var.sap_hana_database_folder
   guest_id                   = each.value.guest_id
   hardware_version           = var.sap_hana_database_hardware_version
